@@ -11,8 +11,8 @@ import { ICounterState } from '../states/counter.state';
   styleUrls: ['./custom-counter-input.component.css'],
 })
 export class CustomCounterInputComponent implements OnInit {
-  value: number;
-  channelName$: Observable<string>;
+  value!: number;
+  channelName$: Observable<string> | undefined;
   constructor(private store: Store<{ counter: ICounterState }>) {}
 
   ngOnInit() {

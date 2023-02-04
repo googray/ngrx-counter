@@ -10,7 +10,7 @@ import { ICounterState } from '../states/counter.state';
   styleUrls: ['./counter-output.component.css'],
 })
 export class CounterOutputComponent implements OnInit {
-  counter$: Observable<number>;
+  counter$: Observable<number> | undefined;
 
   constructor(private store: Store<{ counter: ICounterState }>) {}
 
