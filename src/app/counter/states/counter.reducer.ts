@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import {
+  changeChannelName,
   customIncrement,
   decrement,
   increment,
@@ -32,6 +33,12 @@ const _counterReducer = createReducer(
     return {
       ...state,
       counter: state.counter + action.count,
+    };
+  }),
+  on(changeChannelName, (state) => {
+    return {
+      ...state,
+      channelName: 'Modify Rom Web Dev',
     };
   })
 );
