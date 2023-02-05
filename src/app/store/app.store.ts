@@ -1,4 +1,3 @@
-import { Action, ActionReducerMap } from '@ngrx/store';
 import { counterReducer } from '../counter/states/counter.reducer';
 import { ICounterState } from '../counter/states/counter.state';
 import { IPostsState } from '../models/posts.model';
