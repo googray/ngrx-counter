@@ -1,7 +1,5 @@
 export interface IAuthState {
-  auth: any;
+  [x: string]: any;
 }
 
-export const initialState: IAuthState = {
-  auth: undefined,
-};
+export const initialState: IAuthState = {};
