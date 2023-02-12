@@ -1,7 +1,9 @@
+import { User } from 'src/app/models/user.model';
+
 export interface IAuthState {
-  auth: any;
+  user: User | null;
 }
 
 export const initialState: IAuthState = {
-  auth: undefined,
+  user: null,
 };
