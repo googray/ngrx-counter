@@ -1,10 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { IAppState } from './store/app.store';
+import { getLoading } from './store/Shared/shared.selector';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'ngrx-counter';
+
+  showLoading: Observable<boolean>;
+
+  constructor(private store: Store<IAppState>) {}
+
+  ngOnInit() {
+    this.showLoading = this.store.select(getLoading);
+  }
 }
