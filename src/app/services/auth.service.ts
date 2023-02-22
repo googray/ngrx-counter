@@ -19,6 +19,13 @@ export class AuthService {
     );
   }
 
+  signUp(email: string, password: string): Observable<IAuthResponseData> {
+    return this.http.post<IAuthResponseData>(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.FIRBASE_API_KEY}`,
+      { email, password, returnSecureToken: true }
+    );
+  }
+
   formatUser(data: IAuthResponseData) {
     const expirationDate = new Date(
       new Date().getTime() + +data.expiresIn * 1000
@@ -40,6 +47,8 @@ export class AuthService {
         return 'Invalid Password';
       case 'USER_DISABLED':
         return 'User Desabled';
+      case 'EMAIL_EXISTS':
+        return 'Email already exists';
       default:
         return 'Unknown error occured. Please try agian';
     }
