@@ -9,6 +9,7 @@ import { User } from '../models/user.model';
   providedIn: 'root',
 })
 export class AuthService {
+  timeoutInterval: any;
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<IAuthResponseData> {
@@ -37,6 +38,40 @@ export class AuthService {
       expirationDate
     );
     return user;
+  }
+
+  setUserInLocalStorage(user: User) {
+    localStorage.setItem('userData', JSON.stringify(user));
+
+    this.runTimeoutInterval(user);
+  }
+
+  runTimeoutInterval(user: User) {
+    const todaysDate = new Date().getTime();
+    const expirationDate = user.expireDate.getTime();
+    const timeInterval = expirationDate - todaysDate;
+
+    this.timeoutInterval = setTimeout(() => {
+      //logout functionality or get refresh token
+    }, timeInterval);
+  }
+
+  getUserFromLocalStorage() {
+    const userDataString = localStorage.getItem('userData');
+
+    if (userDataString) {
+      const userData = JSON.parse(userDataString);
+      const expirationDate = new Date(userData.expirationDate);
+      const user = new User(
+        userData.email,
+        userData.token,
+        userData.localId,
+        expirationDate
+      );
+      this.runTimeoutInterval(user);
+      return user;
+    }
+    return null;
   }
 
   getErrorMessage(message: string) {
