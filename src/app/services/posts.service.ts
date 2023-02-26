@@ -24,4 +24,11 @@ export class PostsService {
         })
       );
   }
+
+  addPost(post: IPost): Observable<{ name: string }> {
+    return this.http.post<{ name: string }>(
+      `https://ngrx-counter-tutorial-58c13-default-rtdb.firebaseio.com/posts.json`,
+      post
+    );
+  }
 }

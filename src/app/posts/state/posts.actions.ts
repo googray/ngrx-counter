@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { IPost } from 'src/app/models/posts.model';
 
 export const ADD_POST_ACTION = '[post page] add post';
+export const ADD_POST_SUCCESS = '[post page] add post success';
 export const UPDATE_POST_ACTION = '[post page] update post';
 export const DELETE_POST_ACTION = '[post page] delete post';
 
@@ -23,4 +24,9 @@ export const loadPost = createAction(LOAD_POST);
 export const loadPostSuccess = createAction(
   LOAD_POST_SUCCESS,
   props<{ posts: IPost[] }>()
+);
+
+export const addPostSuccess = createAction(
+  ADD_POST_SUCCESS,
+  props<{ post: IPost }>()
 );
